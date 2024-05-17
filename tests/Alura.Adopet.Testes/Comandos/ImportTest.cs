@@ -16,7 +16,7 @@ public class ImportTest
         List<Pet> listaDePet = new();
         var leitorDeArquivo = LeitorDeArquivosMockBuilder.GetMock(listaDePet);
 
-        var httpClientPet = HttpClientPetMockBuilder.GetMock();
+        var httpClientPet = ApiServiceMockBuilder.GetMock();
 
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
 
@@ -35,7 +35,7 @@ public class ImportTest
         var leitor = LeitorDeArquivosMockBuilder.GetMock(listaDePet);
         leitor.Setup(_ => _.RealizaLeitura()).Throws<FileNotFoundException>();
 
-        var httpClientPet = HttpClientPetMockBuilder.GetMock();
+        var httpClientPet = ApiServiceMockBuilder.GetMock();
 
         var import = new Import(httpClientPet.Object, leitor.Object);
 
@@ -56,7 +56,7 @@ public class ImportTest
         listaDePet.Add(pet);
         var leitorDeArquivo = LeitorDeArquivosMockBuilder.GetMock(listaDePet);
 
-        var httpClientPet = HttpClientPetMockBuilder.GetMock();
+        var httpClientPet = ApiServiceMockBuilder.GetMock();
 
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
 
@@ -68,7 +68,5 @@ public class ImportTest
         var sucesso = (SuccessWithPets)resultado.Successes[0];
         Assert.Equal("Lima", sucesso.Data.First().Nome);
     }
-
-
 
 }
